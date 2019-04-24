@@ -2,7 +2,7 @@ function ball = propagateBall(ball)
     % TODO: write description
     
     % Gravitational acceleartion on Earth
-    g = 9.81;% [m/s]
+    g = -9.81;% [m/s]
     
     % Time delta
     dt = 0.01; % [s]
