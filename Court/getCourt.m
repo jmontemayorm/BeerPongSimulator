@@ -8,16 +8,19 @@ function court = getCourt()
     court.figure = figure;
     
     % Limits
-    court = getCourtLimits(court);
+    court = getLimits(court);
     
     % Floor
-    court = getCourtFloor(court);
+    court = getFloor(court);
     
     % Table
-    court = getCourtTable(court);
+    court = getTable(court);
     
     % Cups
-    court = getCourtCups(court);
+    court = getCups(court);
+    
+    % Shooting zones
+    court = getShootingZones(court);
     
     % Figure setup
     axis equal

@@ -1,4 +1,4 @@
-function court = getCourtCups(court)
+function court = getCups(court)
     % TODO: Add description
     
     floatingSpace = 1e-3;
@@ -113,8 +113,8 @@ function court = getCourtCups(court)
     for c = 1:6
         court.cups.handlers.player1.cup = patch('Faces',cupFaces,'vertices',court.cups.sprites.player1{c},'FaceColor',cupColor,'EdgeAlpha',cupEdgeAlpha);
         court.cups.handlers.player1.base = patch('Faces',cupBase,'vertices',court.cups.sprites.player1{c},'FaceColor',cupColor,'EdgeAlpha',cupEdgeAlpha);
-        court.cups.handlers.player2.cup = patch('Faces',cupFaces,'vertices',court.cups.sprites.player2{c},'FaceColor',cupColor,'EdgeAlpha',cupEdgeAlpha);
-        court.cups.handlers.player2.base = patch('Faces',cupBase,'vertices',court.cups.sprites.player2{c},'FaceColor',cupColor,'EdgeAlpha',cupEdgeAlpha);
+        court.cups.handlers.player2.cup = patch('Faces',cupFaces,'vertices',court.cups.sprites.player2{c},'FaceColor','b','EdgeAlpha',cupEdgeAlpha);
+        court.cups.handlers.player2.base = patch('Faces',cupBase,'vertices',court.cups.sprites.player2{c},'FaceColor','b','EdgeAlpha',cupEdgeAlpha);
     end
 
     

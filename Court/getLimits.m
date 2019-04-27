@@ -1,4 +1,4 @@
-function court = getCourtLimits(court)
+function court = getLimits(court)
     % TODO: Add description
     
     % Set the axis limits

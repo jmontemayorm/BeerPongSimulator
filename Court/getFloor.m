@@ -1,4 +1,4 @@
-function court = getCourtFloor(court)
+function court = getFloor(court)
     % TODO: Add description
     
     % Floor
