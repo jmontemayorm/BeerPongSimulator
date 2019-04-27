@@ -107,15 +107,14 @@ function court = getCourtCups(court)
         court.cups.sprites.player2{cup}(:,1) = -court.cups.sprites.player2{cup}(:,1);
     end
     
-    
+    % Add to the figure
+    figure(court.figure)
+    hold on
     for c = 1:6
-        hold on
-        axis equal
-        patch('Faces',cupFaces,'vertices',court.cups.sprites.player1{c},'FaceColor',cupColor,'EdgeAlpha',cupEdgeAlpha)
-        patch('Faces',cupBase,'vertices',court.cups.sprites.player1{c},'FaceColor',cupColor,'EdgeAlpha',cupEdgeAlpha)
-        patch('Faces',cupFaces,'vertices',court.cups.sprites.player2{c},'FaceColor',cupColor,'EdgeAlpha',cupEdgeAlpha)
-        patch('Faces',cupBase,'vertices',court.cups.sprites.player2{c},'FaceColor',cupColor,'EdgeAlpha',cupEdgeAlpha)
-        view(30,30)
+        court.cups.handlers.player1.cup = patch('Faces',cupFaces,'vertices',court.cups.sprites.player1{c},'FaceColor',cupColor,'EdgeAlpha',cupEdgeAlpha);
+        court.cups.handlers.player1.base = patch('Faces',cupBase,'vertices',court.cups.sprites.player1{c},'FaceColor',cupColor,'EdgeAlpha',cupEdgeAlpha);
+        court.cups.handlers.player2.cup = patch('Faces',cupFaces,'vertices',court.cups.sprites.player2{c},'FaceColor',cupColor,'EdgeAlpha',cupEdgeAlpha);
+        court.cups.handlers.player2.base = patch('Faces',cupBase,'vertices',court.cups.sprites.player2{c},'FaceColor',cupColor,'EdgeAlpha',cupEdgeAlpha);
     end
 
     

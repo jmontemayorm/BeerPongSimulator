@@ -19,8 +19,7 @@ function court = getCourt()
     % Cups
     court = getCourtCups(court);
     
-    
-    % TODO: Change axis stuff
+    % Figure setup
     axis equal
     axis manual
     axis(court.limits.axis)
