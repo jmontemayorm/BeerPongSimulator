@@ -122,7 +122,7 @@ function court = getCups(court)
     end
 
     % Add status of the cups
-    court.cups.status.player1 = true(6,1);
-    court.cups.status.player2 = true(6,1);
+    court.cups.status.player1 = ones(6,1);
+    court.cups.status.player2 = ones(6,1);
 end
 
