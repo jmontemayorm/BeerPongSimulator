@@ -3,7 +3,7 @@ function court = getCups(court)
     
     floatingSpace = 1e-3;
     
-    % Cups
+    % Cup data
     court.cups.height = 0.12065; % [m]
     court.cups.topRadius = 0.047625; % [m]
     court.cups.bottomRadius = 0.03175; % [m]
@@ -13,21 +13,10 @@ function court = getCups(court)
     court.cups.cylinderVertices = 32;
     court.cups.edgeAlpha = 0.25;
     
-    % TODO: Add cup spacing
-    % TODO: Add spacing form the back
-    
-    
-    % % % OLD
-    cupHeight = 0.12065; % [m]
-    cupTopRadius = 0.047625; % [m]
-    cupBottomRadius = 0.03175; % [m]
-    cupColor = [211 44 39] ./ 255;
-    cylinderVertices = 32;
-    cupEdgeAlpha = 0.25;
-    
-    cupR = [cupBottomRadius cupTopRadius];
-    [cupX,cupY,cupZ] = cylinder(cupR,cylinderVertices-1);
-    cupZ = cupHeight * cupZ;
+    % Cup vertices
+    cupR = [court.cups.bottomRadius court.cups.topRadius];
+    [cupX,cupY,cupZ] = cylinder(cupR,court.cups.cylinderVertices-1);
+    cupZ = court.cups.height * cupZ;
     
     cupVertices = zeros(size(cupX,1)*size(cupX,2),3);
     cupFaces = zeros(size(cupX,2),4);
@@ -51,6 +40,9 @@ function court = getCups(court)
     court.cups.sprites.player1 = cell(1,6);
     court.cups.sprites.player2 = cell(1,6);
     
+    court.cups.centers.player1 = zeros(6,2);
+    court.cups.centers.player2 = zeros(6,2);
+    
     % Cup arrangement: Spacing
     xSpacing = sin(pi/3) * (2 * court.cups.topRadius + court.cups.spacing);
     ySpacing = cos(pi/3) * (2 * court.cups.topRadius + court.cups.spacing);
@@ -66,6 +58,7 @@ function court = getCups(court)
     cupBackMiddle(:,1) = cupBackMiddle(:,1) - court.cups.backSpacing;
     
     court.cups.sprites.player1{1} = cupBackMiddle;
+    court.cups.centers.player1(1,1) = court.table.length / 2 - court.cups.topRadius - court.cups.backSpacing;
     
     % Cup arrangement: Back Right
     cupBackRight = cupBackMiddle;
@@ -73,6 +66,8 @@ function court = getCups(court)
     cupBackRight(:,2) = cupBackRight(:,2) + court.cups.spacing;
     
     court.cups.sprites.player1{2} = cupBackRight;
+    court.cups.centers.player1(2,1) = court.cups.centers.player1(1,1);
+    court.cups.centers.player1(2,2) = 2 * court.cups.topRadius + court.cups.spacing;
     
     % Cup arrangement: Back Left
     cupBackLeft = cupBackMiddle;
@@ -80,6 +75,8 @@ function court = getCups(court)
     cupBackLeft(:,2) = cupBackLeft(:,2) - court.cups.spacing;
     
     court.cups.sprites.player1{3} = cupBackLeft;
+    court.cups.centers.player1(3,1) = court.cups.centers.player1(1,1);
+    court.cups.centers.player1(3,2) = - 2 * court.cups.topRadius - court.cups.spacing;
     
     % Cup arrangement: Middle Right
     cupMiddleRight = cupBackMiddle;
@@ -87,6 +84,8 @@ function court = getCups(court)
     cupMiddleRight(:,2) = cupMiddleRight(:,2) + ySpacing;
     
     court.cups.sprites.player1{4} = cupMiddleRight;
+    court.cups.centers.player1(4,1) = court.cups.centers.player1(1,1) - xSpacing;
+    court.cups.centers.player1(4,2) = court.cups.centers.player1(1,2) + ySpacing;
     
     % Cup arrangement: Middle Left
     cupMiddleLeft = cupBackMiddle;
@@ -94,30 +93,36 @@ function court = getCups(court)
     cupMiddleLeft(:,2) = cupMiddleLeft(:,2) - ySpacing;
     
     court.cups.sprites.player1{5} = cupMiddleLeft;
+    court.cups.centers.player1(5,1) = court.cups.centers.player1(1,1) - xSpacing;
+    court.cups.centers.player1(5,2) = court.cups.centers.player1(1,2) - ySpacing;
     
     % Cup arrangement: Front
     cupFront = cupBackMiddle;
     cupFront(:,1) = cupFront(:,1) - 2 * xSpacing;
     
     court.cups.sprites.player1{6} = cupFront;
+    court.cups.centers.player1(6,1) = court.cups.centers.player1(1,1) - 2 * xSpacing;
     
     % Cup arrangement: Mirror for player 2
     for cup = 1:6
         court.cups.sprites.player2{cup} = court.cups.sprites.player1{cup};
         court.cups.sprites.player2{cup}(:,1) = -court.cups.sprites.player2{cup}(:,1);
     end
+    court.cups.centers.player2 = court.cups.centers.player1;
+    court.cups.centers.player2(:,1) = -court.cups.centers.player2(:,1);
     
     % Add to the figure
     figure(court.figure)
     hold on
     for c = 1:6
-        court.cups.handlers.player1.cup = patch('Faces',cupFaces,'vertices',court.cups.sprites.player1{c},'FaceColor',cupColor,'EdgeAlpha',cupEdgeAlpha);
-        court.cups.handlers.player1.base = patch('Faces',cupBase,'vertices',court.cups.sprites.player1{c},'FaceColor',cupColor,'EdgeAlpha',cupEdgeAlpha);
-        court.cups.handlers.player2.cup = patch('Faces',cupFaces,'vertices',court.cups.sprites.player2{c},'FaceColor','b','EdgeAlpha',cupEdgeAlpha);
-        court.cups.handlers.player2.base = patch('Faces',cupBase,'vertices',court.cups.sprites.player2{c},'FaceColor','b','EdgeAlpha',cupEdgeAlpha);
+        court.cups.handlers.player1.cup = patch('Faces',cupFaces,'vertices',court.cups.sprites.player1{c},'FaceColor',court.cups.color,'EdgeAlpha',court.cups.edgeAlpha);
+        court.cups.handlers.player1.base = patch('Faces',cupBase,'vertices',court.cups.sprites.player1{c},'FaceColor',court.cups.color,'EdgeAlpha',court.cups.edgeAlpha);
+        court.cups.handlers.player2.cup = patch('Faces',cupFaces,'vertices',court.cups.sprites.player2{c},'FaceColor','b','EdgeAlpha',court.cups.edgeAlpha);
+        court.cups.handlers.player2.base = patch('Faces',cupBase,'vertices',court.cups.sprites.player2{c},'FaceColor','b','EdgeAlpha',court.cups.edgeAlpha);
     end
 
-    
-    
+    % Add status of the cups
+    court.cups.status.player1 = true(6,1);
+    court.cups.status.player2 = true(6,1);
 end
 
