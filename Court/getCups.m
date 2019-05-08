@@ -1,10 +1,12 @@
 function court = getCups(court)
-    % TODO: Add description
+    % GETCUPS adds 6 cups to each side of the table and returns an updated
+    % court struct.
     
     floatingSpace = 1e-3;
     
     % Cup data
     court.cups.height = 0.12065; % [m]
+    court.cups.floatingSpace = 1e-3; % [m]
     court.cups.topRadius = 0.047625; % [m]
     court.cups.bottomRadius = 0.03175; % [m]
     court.cups.spacing = 0.01; % [m]
@@ -18,6 +20,7 @@ function court = getCups(court)
     [cupX,cupY,cupZ] = cylinder(cupR,court.cups.cylinderVertices-1);
     cupZ = court.cups.height * cupZ;
     
+    % Vertices and faces transformation
     cupVertices = zeros(size(cupX,1)*size(cupX,2),3);
     cupFaces = zeros(size(cupX,2),4);
     for vertex = 1:size(cupX,2)
@@ -33,10 +36,12 @@ function court = getCups(court)
     cupFaces(cupFaces > size(cupVertices,1)) = cupFaces(cupFaces > size(cupVertices,1)) - size(cupVertices,1);
     cupBase = 1:2:size(cupVertices,1);
     
+    % Save original data into the struct
     court.cups.vertices = cupVertices;
     court.cups.faces = cupFaces;
     court.cups.base = cupBase;
     
+    % Preallocate memory
     court.cups.sprites.player1 = cell(1,6);
     court.cups.sprites.player2 = cell(1,6);
     
@@ -51,7 +56,7 @@ function court = getCups(court)
     cupBackMiddle = court.cups.vertices;
     
     cupBackMiddle(:,3) = cupBackMiddle(:,3) + court.table.bottomHeight;
-    cupBackMiddle(:,3) = cupBackMiddle(:,3) + court.table.thickness + floatingSpace;
+    cupBackMiddle(:,3) = cupBackMiddle(:,3) + court.table.thickness + court.cups.floatingSpace;
     
     cupBackMiddle(:,1) = cupBackMiddle(:,1) + court.table.length / 2;
     cupBackMiddle(:,1) = cupBackMiddle(:,1) - court.cups.topRadius;
@@ -110,6 +115,12 @@ function court = getCups(court)
     end
     court.cups.centers.player2 = court.cups.centers.player1;
     court.cups.centers.player2(:,1) = -court.cups.centers.player2(:,1);
+    
+    % Preallocate memory for handlers
+    court.cups.handlers.player1.cup = cell(1,6);
+    court.cups.handlers.player1.base = cell(1,6);
+    court.cups.handlers.player2.cup = cell(1,6);
+    court.cups.handlers.player2.base = cell(1,6);
     
     % Add to the figure
     figure(court.figure)

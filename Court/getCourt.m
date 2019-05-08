@@ -1,5 +1,6 @@
 function court = getCourt()
-    % TODO: Add description
+    % GETCOURT builds and returns a court struct with relevant data and
+    % figure handlers.
     
     % Initialize court as struct
     court = struct;
