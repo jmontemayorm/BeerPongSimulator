@@ -2,8 +2,6 @@ function court = getCups(court)
     % GETCUPS adds 6 cups to each side of the table and returns an updated
     % court struct.
     
-    floatingSpace = 1e-3;
-    
     % Cup data
     court.cups.height = 0.12065; % [m]
     court.cups.floatingSpace = 1e-3; % [m]
