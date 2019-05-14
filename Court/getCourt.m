@@ -1,12 +1,20 @@
-function court = getCourt()
+function court = getCourt(isVisible)
     % GETCOURT builds and returns a court struct with relevant data and
     % figure handlers.
     
     % Initialize court as struct
     court = struct;
     
+    if nargin == 1
+        court.isVisible = isVisible;
+    else
+        court.isVisible = true;
+    end
+    
     % Get a figure for the court
-    court.figure = figure;
+    if court.isVisible
+        court.figure = figure;
+    end
     
     % Limits
     court = getLimits(court);
@@ -28,9 +36,12 @@ function court = getCourt()
     court.score.player2 = 0;
     
     % Figure setup
-    axis equal
-    axis manual
-    axis(court.limits.axis)
-    grid on
-    view(30,30)
+    if court.isVisible
+        axis equal
+        axis manual
+        axis(court.limits.axis)
+        grid on
+        view(30,30)
+    end
+
 end
