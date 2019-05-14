@@ -1,9 +1,5 @@
-%% BeerPong Simulator: Main
-% TODO: Description
+% BeerPong Simulator match test, 10 shots per player
 
-%% Game Setup
-% Engine environment
-environment = getEnvironment();
-
-% Game court
-court = getCourt();
+nn1 = createNeuralNetwork;
+nn2 = createNeuralNetwork;
+[s1,s2] = beerpongMatch(nn1,nn2,10);
