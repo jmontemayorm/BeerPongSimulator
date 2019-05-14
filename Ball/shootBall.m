@@ -36,13 +36,15 @@ function court = shootBall(neuralNetwork,environment,court,player)
     
     % Extrapolate to the XY plane
     delta_t = (xy_plane - oldBall.posZ) ./ oldBall.velZ;
+    newEnvironment = environment;
+    environment.dt = delta_t;
     
-    ballXY(1) = oldBall.posX + oldBall.velX * delta_t;
-    ballXY(2) = oldBall.posY + oldBall.velY * delta_t;
+    ball = propagateBall(oldBall,newEnvironment);
+%     ballXY(1) = oldBall.posX + oldBall.velX * delta_t;
+%     ballXY(2) = oldBall.posY + oldBall.velY * delta_t;
     
     % Detect hit, update score and remove cup
-    cupIdx = 0;
-    %cupIdx = detectHit(ballXY,court,player);
+    cupIdx = detectHit(ball,court,player);
     if cupIdx ~= 0
         if player == 1 && court.cups.status.player2(cupIdx) == 1
             court.score.player1 = court.score.player1 + 1;
