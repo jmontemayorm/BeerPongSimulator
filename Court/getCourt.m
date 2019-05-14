@@ -23,6 +23,10 @@ function court = getCourt()
     % Shooting zones
     court = getShootingZones(court);
     
+    % Score
+    court.score.player1 = 0;
+    court.score.player2 = 0;
+    
     % Figure setup
     axis equal
     axis manual
