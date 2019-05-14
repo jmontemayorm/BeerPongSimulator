@@ -30,8 +30,10 @@ function court = shootBall(neuralNetwork,environment,court,player)
     while (ball.posZ > xy_plane || ball.velZ >= 0)
         oldBall = ball;
         ball = propagateBall(ball,environment);
-        ball = drawBall(ball);
-        pause(0)
+        if court.isVisible
+            ball = drawBall(ball);
+            pause(0)
+        end
     end
     
     % Extrapolate to the XY plane
@@ -60,6 +62,8 @@ function court = shootBall(neuralNetwork,environment,court,player)
     end
     
     % Delete ball handler
-    delete(ball.handler)
+    if court.isVisible
+        delete(ball.handler)
+    end
 end
 

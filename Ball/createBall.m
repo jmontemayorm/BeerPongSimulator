@@ -62,5 +62,7 @@ function ball = createBall(networkOutput,court,player)
     ball.velZ = v0 * sin(el);
     
     % Draw
-    ball.handler = surf(ball.meshX,ball.meshY,ball.meshZ,'FaceColor',ball.color,'EdgeAlpha',ball.edgeAlpha);
+    if court.isVisible
+        ball.handler = surf(ball.meshX,ball.meshY,ball.meshZ,'FaceColor',ball.color,'EdgeAlpha',ball.edgeAlpha);
+    end
 end

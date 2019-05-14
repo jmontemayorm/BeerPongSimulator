@@ -40,7 +40,9 @@ function court = getTable(court)
     court.table.color = [0.9 0.9 0.9];
     
     % Add to the figure
-    figure(court.figure)
-    hold on
-    court.table.pHandler = patch('Faces',court.table.faces,'Vertices',court.table.vertices,'FaceColor',court.table.color);
+    if court.isVisible
+        figure(court.figure)
+        hold on
+        court.table.pHandler = patch('Faces',court.table.faces,'Vertices',court.table.vertices,'FaceColor',court.table.color);
+    end
 end

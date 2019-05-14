@@ -1,4 +1,4 @@
-function [score1,score2] = beerpongMatch(neuralNetwork1,neuralNetwork2,maxShotsPerPlayer)
+function [score1,score2] = beerpongMatch(neuralNetwork1,neuralNetwork2,maxShotsPerPlayer,isVisible)
     % TODO: Add description
     
     if nargin < 2
@@ -10,8 +10,13 @@ function [score1,score2] = beerpongMatch(neuralNetwork1,neuralNetwork2,maxShotsP
         maxShotsPerPlayer = 100;
     end
     
+    % Default visibility
+    if nargin < 4
+        isVisible = true;
+    end
+    
     % Get the court and envrionment
-    court = getCourt();
+    court = getCourt(isVisible);
     environment = getEnvironment();
     
     % Neural Networks

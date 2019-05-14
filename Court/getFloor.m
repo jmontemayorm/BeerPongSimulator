@@ -11,7 +11,9 @@ function court = getFloor(court)
     court.floor.color = [50 114 34] ./ 255;
     
     % Add to the figure
-    figure(court.figure)
-    hold on
-    court.floor.pHandler = patch('Faces',court.floor.faces,'Vertices',court.floor.vertices,'FaceColor',court.floor.color);
+    if court.isVisible
+        figure(court.figure)
+        hold on
+        court.floor.pHandler = patch('Faces',court.floor.faces,'Vertices',court.floor.vertices,'FaceColor',court.floor.color);
+    end
 end
