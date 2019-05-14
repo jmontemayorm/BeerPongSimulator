@@ -40,8 +40,6 @@ function court = shootBall(neuralNetwork,environment,court,player)
     environment.dt = delta_t;
     
     ball = propagateBall(oldBall,newEnvironment);
-%     ballXY(1) = oldBall.posX + oldBall.velX * delta_t;
-%     ballXY(2) = oldBall.posY + oldBall.velY * delta_t;
     
     % Detect hit, update score and remove cup
     cupIdx = detectHit(ball,court,player);
