@@ -31,7 +31,7 @@ function court = shootBall(neuralNetwork,environment,court,player)
         oldBall = ball;
         ball = propagateBall(ball,environment);
         ball = drawBall(ball);
-        pause(environment.dt)
+        pause(0)
     end
     
     % Extrapolate to the XY plane
