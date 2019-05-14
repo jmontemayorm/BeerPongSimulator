@@ -42,7 +42,7 @@ function court = shootBall(neuralNetwork,environment,court,player)
     
     % Detect hit, update score and remove cup
     cupIdx = 0;
-    %cupIdx = detectHit(ballXY,court);
+    %cupIdx = detectHit(ballXY,court,player);
     if cupIdx ~= 0
         if player == 1 && court.cups.status.player2(cupIdx) == 1
             court.score.player1 = court.score.player1 + 1;
