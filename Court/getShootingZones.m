@@ -50,22 +50,24 @@ function court = getShootingZones(court)
     court.shootingZones.player2.vertices(:,1) = -court.shootingZones.player2.vertices(:,1);
     
     % Add calculated data
-    court.shootingZones.absMinX = min(vertices(:,1));
-    court.shootingZones.absMaxX = max(vertices(:,1));
-    court.shootingZones.absMinY = min(vertices(:,2));
-    court.shootingZones.absMaxY = max(vertices(:,2));
-    court.shootingZones.absMinZ = min(vertices(:,3));
-    court.shootingZones.absMaxZ = max(vertices(:,3));
+    court.shootingZones.minX = min(abs(vertices(:,1)));
+    court.shootingZones.maxX = max(abs(vertices(:,1)));
+    court.shootingZones.minY = min(vertices(:,2));
+    court.shootingZones.maxY = max(vertices(:,2));
+    court.shootingZones.minZ = min(vertices(:,3));
+    court.shootingZones.maxZ = max(vertices(:,3));
     
     % Add to the figure
-    figure(court.figure)
-    hold on
-    court.shootingZones.handlers.player1 = ...
-        patch('Faces',court.shootingZones.player1.faces, ...
-        'Vertices',court.shootingZones.player1.vertices, ...
-        'FaceColor','none','EdgeColor','r');
-    court.shootingZones.handlers.player2 = ...
-        patch('Faces',court.shootingZones.player1.faces, ...
-        'Vertices',court.shootingZones.player2.vertices, ...
-        'FaceColor','none','EdgeColor','b');
+    if court.isVisible
+        figure(court.figure)
+        hold on
+        court.shootingZones.handlers.player1 = ...
+            patch('Faces',court.shootingZones.player1.faces, ...
+            'Vertices',court.shootingZones.player1.vertices, ...
+            'FaceColor','none','EdgeColor','r');
+        court.shootingZones.handlers.player2 = ...
+            patch('Faces',court.shootingZones.player1.faces, ...
+            'Vertices',court.shootingZones.player2.vertices, ...
+            'FaceColor','none','EdgeColor','b');
+    end
 end
