@@ -124,10 +124,10 @@ function court = getCups(court)
     figure(court.figure)
     hold on
     for c = 1:6
-        court.cups.handlers.player1.cup = patch('Faces',cupFaces,'vertices',court.cups.sprites.player1{c},'FaceColor',court.cups.color,'EdgeAlpha',court.cups.edgeAlpha);
-        court.cups.handlers.player1.base = patch('Faces',cupBase,'vertices',court.cups.sprites.player1{c},'FaceColor',court.cups.color,'EdgeAlpha',court.cups.edgeAlpha);
-        court.cups.handlers.player2.cup = patch('Faces',cupFaces,'vertices',court.cups.sprites.player2{c},'FaceColor','b','EdgeAlpha',court.cups.edgeAlpha);
-        court.cups.handlers.player2.base = patch('Faces',cupBase,'vertices',court.cups.sprites.player2{c},'FaceColor','b','EdgeAlpha',court.cups.edgeAlpha);
+        court.cups.handlers.player1.cup{c} = patch('Faces',cupFaces,'vertices',court.cups.sprites.player1{c},'FaceColor',court.cups.color,'EdgeAlpha',court.cups.edgeAlpha);
+        court.cups.handlers.player1.base{c} = patch('Faces',cupBase,'vertices',court.cups.sprites.player1{c},'FaceColor',court.cups.color,'EdgeAlpha',court.cups.edgeAlpha);
+        court.cups.handlers.player2.cup{c} = patch('Faces',cupFaces,'vertices',court.cups.sprites.player2{c},'FaceColor','b','EdgeAlpha',court.cups.edgeAlpha);
+        court.cups.handlers.player2.base{c} = patch('Faces',cupBase,'vertices',court.cups.sprites.player2{c},'FaceColor','b','EdgeAlpha',court.cups.edgeAlpha);
     end
 
     % Add status of the cups

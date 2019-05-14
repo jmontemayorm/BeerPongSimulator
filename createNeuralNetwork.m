@@ -2,6 +2,7 @@ function neuralNetwork = createNeuralNetwork()
     % TODO: Add description (randomized neural network, 12, 18, 12, 18, 12,
     % 6 in, 6 out)
     
+    % Initialize as struct and allocate memory
     neuralNetwork = struct;
     neuralNetwork.layers = cell(1,6);
     

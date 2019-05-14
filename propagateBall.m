@@ -8,5 +8,5 @@ function ball = propagateBall(ball,environment)
     ball.posZ = ball.posZ + ball.velZ * environment.dt + 0.5 * environment.g * environment.dt^2;
     
     % Update z velocity
-    ball.velZ = ball.velZ + environment.g * environment.dt;
+    ball.velZ = ball.velZ - environment.g * environment.dt;
 end
