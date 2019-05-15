@@ -2,12 +2,12 @@
 
 %% Settings
 % Generations
-enableMaxGenerations = 1;
-maxGenerations = 1500;
+enableMaxGenerations = 0;
+maxGenerations = 50;
 
 % Timeout
-enableTimeout = 0;
-timeoutMinutes = 5;
+enableTimeout = 1;
+timeoutMinutes = 90;
 
 % Console output
 suppressOutput = 0;
@@ -21,7 +21,7 @@ elitismFraction = 0.1;
 % Population and mutation
 populationSize = 2^7; % Must be a power of 2, because of the tournament
 
-maxShotsPerPlayer = 20;
+maxShotsPerPlayer = 50;
 
 paternalProbability = 0.6;
 
