@@ -3,9 +3,11 @@ function court = shootBall(neuralNetwork,environment,court,player)
     
     % Get shooting angles and speed
     if player == 1
-        outData = court.cups.status.player2;
+        %outData = court.cups.status.player2;
+        outData = court.cups.centers.player1(find(court.cups.status.player2,1))';
     else
-        outData = court.cups.status.player1;
+        %outData = court.cups.status.player1;
+        outData = court.cups.centers.player1(find(court.cups.status.player1,1))';
     end
     
    	for layer = 1:length(neuralNetwork.layers)
