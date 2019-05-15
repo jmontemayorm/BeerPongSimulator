@@ -20,7 +20,7 @@ function court = shootBall(neuralNetwork,environment,court,player)
     end
     
     % Add random variations
-    variations = 0.07 .* rand(6,1);
+    variations = 0.075 .* rand(6,1);
     signs = 2 .* randi([0,1],[6,1]) - 1;
     outData = signs .* variations + outData;
     outData(outData > 1) = 1;

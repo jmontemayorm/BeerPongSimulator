@@ -2,12 +2,12 @@
 
 %% Settings
 % Generations
-enableMaxGenerations = 0;
+enableMaxGenerations = 1;
 maxGenerations = 50;
 
 % Timeout
 enableTimeout = 1;
-timeoutMinutes = 90;
+timeoutMinutes = 10;
 
 % Console output
 suppressOutput = 0;
