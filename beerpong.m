@@ -99,12 +99,11 @@ while true % Breaking conditions found before updating the counter
         end
     end
     
-%     % TODO: CHANGE BEST SPECIMEN
-%     % Make 2 clones of the best
-%     cloneIdx = find(killIdx,2);
-%     players{cloneIdx(1)} = bestSpecimen;
-%     players{cloneIdx(2)} = bestSpecimen;
-%     killIdx(cloneIdx(:)) = false;
+    % Make clones of the best 2
+    cloneIdx = find(killIdx,2);
+    players{cloneIdx(1)} = players{ranking(1)};
+    players{cloneIdx(2)} = players{ranking(2)};
+    killIdx(cloneIdx(:)) = false;
     
     % Kill and substitute via reproduction
     replaceWithBaby = find(killIdx);
