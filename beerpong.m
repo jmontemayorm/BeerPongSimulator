@@ -7,7 +7,7 @@ maxGenerations = 5000;
 
 % Timeout
 enableTimeout = 1;
-timeoutMinutes = 20;
+timeoutMinutes = 5;
 
 % Console output
 suppressOutput = 0;
@@ -18,25 +18,15 @@ outputModulation = 100;
 enableElitism = 1;
 elitismFraction = 0.1;
 
-% Population
+% Population and mutation
 populationSize = 2^7; % Must be a power of 2, because of the tournament
 
 maxShotsPerPlayer = 20;
 
 paternalProbability = 0.6;
 
-% Mutation (0 = static, 1 = linear, 2 = exponential, 3 = cyclical)
-% dynamicMutation = 3;
-
 mutationProbability = 0.000001;
 maxMutationSize = 0.1;
-
-% initialMutationProbability = 0.00005;
-% finalMutationProbability = 0.0000005;
-% 
-% finalDynamicGeneration = 30000;
-% 
-% cyclicalWavelengthInGenerations = 150;
 
 % Cooldown
 enableCooldown = 0;
@@ -70,9 +60,14 @@ exampleNN = players{1};
 %% Evolution
 generation = 1;
 
+bestOfGeneration = cell(maxGenerations,2);
+
 tic
 while true % Breaking conditions found before updating the counter
     
+    fprintf('Starting tournament for generation %05i...\n',generation);
+    
+    % Run tournament
     ranking = playTournament(players,maxShotsPerPlayer);
     
     % % % Survival of the fittest % % %
@@ -98,6 +93,10 @@ while true % Breaking conditions found before updating the counter
             end
         end
     end
+    
+    % Save the best 2
+    bestOfGeneration{generation,1} = players{ranking(1)};
+    bestOfGeneration{generation,2} = players{ranking(2)};
     
     % Make clones of the best 2
     cloneIdx = find(killIdx,2);
@@ -152,24 +151,7 @@ while true % Breaking conditions found before updating the counter
         end
     end
     
-    % % % Mutations % % %
-    % Stick to a static mutation if dynamic has ended
-%     if generation > finalDynamicGeneration
-%         dynamicMutation = 0;
-%     end
-
-    % Calculate the respective mutation probability
-%     if dynamicMutation == 1
-%         mutationProbability = initialMutationProbability - eta * generation;
-%     elseif dynamicMutation == 2
-%         mutationProbability = initialMutationProbability * alpha ^ generation;
-%     elseif dynamicMutation == 3
-%         normalizedCosine = 0.5 * (1 + cos(2 * pi * generation / cyclicalWavelengthInGenerations));
-%         mutationProbability = finalMutationProbability + (initialMutationProbability - finalMutationProbability) * normalizedCosine;
-%     else
-%         mutationProbability = staticMutationProbability;
-%     end
-    
+    % % % Mutations % % %    
     % Mutate
     for player = 1:populationSize
         for layer = 1:length(exampleNN.layers)
