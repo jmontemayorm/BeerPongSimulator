@@ -6,7 +6,7 @@ function neuralNetwork = createNeuralNetwork()
     
     % Initialize as struct and allocate memory
     neuralNetwork = struct;
-    neuralNetwork.layers = cell(1,6);
+    neuralNetwork.layers = cell(1,length(networkSize)-1);
     
     for layer = 1:length(neuralNetwork.layers)
         neuralNetwork.layers{layer} = 2 * rand(networkSize(layer + 1),networkSize(layer)) - 1;
