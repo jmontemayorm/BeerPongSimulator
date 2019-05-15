@@ -3,9 +3,15 @@ function court = shootBall(neuralNetwork,environment,court,player)
     
     % Get shooting angles and speed
     if player == 1
-        outData = court.cups.status.player2;
+        %outData = court.cups.status.player2;
+        idx = find(court.cups.status.player2,1);
+        idx2 = randi([1,length(idx)],[1,1]);
+        outData = court.cups.centers.player1(idx(idx2),:)';
     else
-        outData = court.cups.status.player1;
+        %outData = court.cups.status.player1;
+        idx = find(court.cups.status.player1,1);
+        idx2 = randi([1,length(idx)],[1,1]);
+        outData = court.cups.centers.player1(idx(idx2),:)';
     end
     
    	for layer = 1:length(neuralNetwork.layers)
@@ -14,7 +20,7 @@ function court = shootBall(neuralNetwork,environment,court,player)
     end
     
     % Add random variations
-    variations = 0.075 .* rand(6,1);
+    variations = 0.07 .* rand(6,1);
     signs = 2 .* randi([0,1],[6,1]) - 1;
     outData = signs .* variations + outData;
     outData(outData > 1) = 1;

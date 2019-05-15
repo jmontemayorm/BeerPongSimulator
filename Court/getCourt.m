@@ -14,6 +14,8 @@ function court = getCourt(isVisible)
     % Get a figure for the court
     if court.isVisible
         court.figure = figure;
+        set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.12, 0.75, 0.8])
+        pause(0.1)
     end
     
     % Limits
@@ -42,8 +44,6 @@ function court = getCourt(isVisible)
         axis(court.limits.axis)
         grid on
         view(30,30)
-        set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.12, 0.75, 0.8])
-        pause(0.1)
     end
 
 end
