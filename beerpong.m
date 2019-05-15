@@ -3,16 +3,16 @@
 %% Settings
 % Generations
 enableMaxGenerations = 1;
-maxGenerations = 5000;
+maxGenerations = 1500;
 
 % Timeout
-enableTimeout = 1;
+enableTimeout = 0;
 timeoutMinutes = 5;
 
 % Console output
 suppressOutput = 0;
 modulateOutput = 1;
-outputModulation = 100;
+outputModulation = 10;
 
 % Elitism
 enableElitism = 1;
@@ -64,8 +64,9 @@ bestOfGeneration = cell(maxGenerations,2);
 
 tic
 while true % Breaking conditions found before updating the counter
-    
-    fprintf('Starting tournament for generation %05i...\n',generation);
+    if suppressOutput == 0 && (modulateOutput == 0 || mod(generation,outputModulation) == 0)
+        fprintf('Starting tournament for generation %05i...\n',generation);
+    end
     
     % Run tournament
     ranking = playTournament(players,maxShotsPerPlayer);
